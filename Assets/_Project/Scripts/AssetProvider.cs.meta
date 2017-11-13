@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1619729a33c989344a259b35f715cbc3
+timeCreated: 1510512853
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - PlayerMaterial: {instanceID: 0}
+  - InnocentMaterial: {instanceID: 0}
+  - HeroMaterial: {instanceID: 0}
+  - SlaveMaterial: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
