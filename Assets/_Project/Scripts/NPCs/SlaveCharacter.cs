@@ -4,9 +4,18 @@ namespace Hordes
 {
     public class SlaveCharacter : Character
     {
-        #region VARIABLES
-        public float m_FollowSmoothing = 5;
-        public float m_LookSmoothing = 5;
+		#region PROPERTIES
+		public bool isAttacking { get; private set; }
+		#endregion
+
+
+		#region VARIABLES
+		public Animator m_Animator;
+
+		public float m_FollowSmoothing = 5f;
+        public float m_LookSmoothing = 5f;
+
+		public float m_AttackSpeed = 100f;
 
 		private Transform m_Transform;
 
@@ -23,7 +32,12 @@ namespace Hordes
 
         void FixedUpdate()
         {
-            m_Components.m_Rigidbody.position = Vector3.Lerp(
+			if (isAttacking)
+			{
+				return;
+			}
+
+            m_Components.m_Body.position = Vector3.Lerp(
                 m_Components.transform.position,
                 m_FollowTarget.TransformPoint(m_FollowOffset),
                 Time.deltaTime * m_FollowSmoothing);
@@ -39,16 +53,26 @@ namespace Hordes
             m_FollowOffset = followOffset;
         }
 
-        public void ReadyAttack()
+        public void SetAttackReady(bool ready)
         {
-            // Spin
-        }
+			m_Animator.SetBool("AttackReady", ready);
+		}
 
-        public void Attack()
+		public void SetAttackSet(bool set)
+		{
+			m_Animator.SetBool("AttackSet", set);
+		}
+
+		public void Attack(Vector3 targetPosition)
         {
-            // Shoot at target
-        }
-        #endregion
-    }
+			// Shoot at target
+			isAttacking = true;
+			m_Components.m_Body.velocity = (targetPosition - m_Components.m_Body.position).normalized * m_AttackSpeed;
+			m_Components.m_Body.drag = 0;
+
+			m_Animator.SetBool("Attack", true);
+		}
+		#endregion
+	}
 }
 

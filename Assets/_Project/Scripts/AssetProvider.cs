@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+using Utilities;
+
 namespace Hordes
 {
     public class AssetProvider : MonoBehaviour
@@ -12,23 +14,30 @@ namespace Hordes
         public Material innocentMaterial { get { return m_InnocentMaterial; } }
         public Material heroMaterial { get { return m_HeroMaterial; } }
         public Material slaveMaterial { get { return m_SlaveMaterial; } }
-        #endregion
+
+		// Prefabs
+		public GameObject innocentPrefab { get { return m_InnocentPrefab; } }
+		#endregion
 
 
-        #region VARIABLES
-        [SerializeField] private Material m_PlayerMaterial;
+		#region VARIABLES
+		[SerializeField] private Material m_PlayerMaterial;
         [SerializeField] private Material m_InnocentMaterial;
         [SerializeField] private Material m_HeroMaterial;
         [SerializeField] private Material m_SlaveMaterial;
-        #endregion
+		[Space(10)]
+
+		// Prefabs
+		[SerializeField] private GameObject m_InnocentPrefab;
+		#endregion
 
 
-        #region UNITY EVENTS
-        void Awake()
+		#region UNITY EVENTS
+		void Awake()
         {
             if (instance != null)
             {
-                Logger.LogErrorFormat(this, "There is more than one manager instance in the scene.");
+                LogContext.LogErrorFormat(this, "There is more than one manager instance in the scene.");
                 return;
             }
 

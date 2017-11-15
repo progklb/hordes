@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4794466233994338}
   - component: {fileID: 114340887569870598}
-  - component: {fileID: 114523137369977072}
+  - component: {fileID: 114386506947982362}
   m_Layer: 0
   m_Name: Logic
   m_TagString: Untagged
@@ -71,6 +71,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4867343492067428}
+  - component: {fileID: 95567380207678080}
   m_Layer: 0
   m_Name: Model Container
   m_TagString: Untagged
@@ -187,6 +188,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!95 &95567380207678080
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977944646588210}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b4a07b7b3b6ba564a820ed90e06a66bd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114340887569870598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -198,7 +216,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962c4e6dfe1518649990058f904ecb01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114523137369977072
+  m_HordeController: {fileID: 114386506947982362}
+  m_Body: {fileID: 54807616404667378}
+  m_MovementSpeed: 500
+  m_SprintScaler: 2
+--- !u!114 &114386506947982362
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -206,13 +228,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1304250405890654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3369118bd877b14395e57cca8882d79, type: 3}
+  m_Script: {fileID: 11500000, guid: 23629027f4b217549a25285c2edac0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CamInput: {fileID: 0}
-  m_PlayerBody: {fileID: 54807616404667378}
-  m_MovementSpeed: 500
-  m_SprintScaler: 2
+  m_RowSpacing: 1
+  m_ColSpacing: 1
 --- !u!114 &114718411641755072
 MonoBehaviour:
   m_ObjectHideFlags: 1

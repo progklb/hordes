@@ -8,7 +8,7 @@ namespace Hordes
         public SlaveCharacter m_Slave;
         public InnocentCharacter m_Innocent;
 
-        public Rigidbody m_Rigidbody;
+        public Rigidbody m_Body;
         #endregion
     }
 }
