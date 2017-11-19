@@ -134,7 +134,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1051079940581816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4970750210287196}
@@ -378,6 +378,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Components: {fileID: 114222699599899026}
   m_Animator: {fileID: 95425232911621694}
+  m_SlaveDestroyedEffect: {fileID: 1724568988685490, guid: dc23c848fe397a04c82e9383d176be6c,
+    type: 2}
   m_FollowSmoothing: 5
   m_LookSmoothing: 5
   m_AttackSpeed: 100

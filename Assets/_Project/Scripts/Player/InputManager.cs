@@ -7,6 +7,8 @@ namespace Hordes
         #region VARIABLES
         public CameraInput m_CamInput;
 		public PlayerController m_Player;
+
+		public static System.Action<InputManager> man = delegate { }; 
         #endregion
 
 
@@ -24,10 +26,7 @@ namespace Hordes
 		{
 			m_Player.SetSprinting(Input.GetKey(KeyCode.LeftShift));
 
-			if (Input.GetKey(KeyCode.W))
-			{
-				m_Player.Move(m_Player.m_Body.transform.forward);
-			}
+			NewMethod();
 			if (Input.GetKey(KeyCode.A))
 			{
 				m_Player.Move(-m_Player.m_Body.transform.right);
@@ -42,6 +41,16 @@ namespace Hordes
 			}
 
 			m_Player.SetLookDirection(m_CamInput.PointerPosition - m_Player.transform.position);
+
+			return;
+		}
+
+		private void NewMethod()
+		{
+			if (Input.GetKey(KeyCode.W))
+			{
+				m_Player.Move(m_Player.m_Body.transform.forward);
+			}
 		}
 
 		void ProcessAbilities()

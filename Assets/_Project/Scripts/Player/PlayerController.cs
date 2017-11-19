@@ -2,6 +2,7 @@
 
 namespace Hordes
 {
+	[RequireComponent(typeof(HordeController))]
     public class PlayerController : MonoBehaviour
     {
         #region VARIABLES
@@ -17,9 +18,9 @@ namespace Hordes
 
 		#region UNITY EVENTS
 		void Start()
-        {
-            CharacterNotifier.onCharacterTouched += OnCharacterTouched;
-        }
+		{
+			CharacterNotifier.onCharacterTouched += OnCharacterTouched;
+		}
 		#endregion
 
 

@@ -6,6 +6,12 @@ namespace Hordes
 {
     public class HordeController : MonoBehaviour
     {
+        #region CONSTANTS
+        private const int STARTING_ROW = 1;
+        private const int STARTING_COL = 0;
+        #endregion
+
+
         #region PROPERTIES
         private int colCapacity { get { return m_CurrentRow + 1; } }
 		private SlaveCharacter lastSlave { get { return m_Horde.Count > 0 ? m_Horde[m_Horde.Count - 1].m_Components.m_Slave : null; } }
@@ -17,31 +23,28 @@ namespace Hordes
         public float m_ColSpacing = 1;
 
         private List<Character> m_Horde = new List<Character>();
-        private int m_CurrentRow = 1;
-        private int m_CurrentCol = 0;
+        private int m_CurrentRow = STARTING_ROW;
+        private int m_CurrentCol = STARTING_COL;
 
 		private bool m_AttackReady = false;
+        #endregion
+
+
+        #region UNITY EVENTS
+        void Start()
+        {
+            Character.onDestroyed += HandleSlavedDestroyed;
+        }
         #endregion
 
 
         #region PUBLIC API
         public void Enslave(Character character)
         {
-			if (m_AttackReady && lastSlave != null)
-			{
-				lastSlave.SetAttackSet(false);
-			}
-
             var slave = character.BecomeSlave();
-            slave.Initialise(transform, GetNextPosition());
+            m_Horde.Add(character);
 
-			m_Horde.Add(character);
-
-			if (m_AttackReady)
-			{
-				lastSlave.SetAttackReady(true);
-				lastSlave.SetAttackSet(true);
-			}
+            ResetFormation();
 		}
 		#endregion
 
@@ -85,6 +88,15 @@ namespace Hordes
 
 
 		#region HELPER FUNCTIONS
+        void HandleSlavedDestroyed(Character slave)
+        {
+            m_Horde.Remove(slave);
+            ResetFormation();
+        }
+        #endregion
+
+
+        #region HELPER FUNCTIONS - FORMATION
 		void RecalculatePreviousPosition()
 		{
 			if (m_CurrentCol > 0)
@@ -118,6 +130,20 @@ namespace Hordes
             }
 
             return new Vector3(colOffset, 0, rowOffset);
+        }
+
+        void ResetFormation()
+        {
+            m_CurrentRow = STARTING_ROW;
+            m_CurrentCol = STARTING_COL;
+
+            foreach (var slave in m_Horde)
+            {
+                slave.m_Components.m_Slave.Initialise(transform, GetNextPosition());
+
+                lastSlave.SetAttackReady(m_AttackReady);
+                lastSlave.SetAttackSet(m_AttackReady && slave == lastSlave);
+            }
         }
         #endregion
     }
