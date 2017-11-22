@@ -45,7 +45,7 @@ namespace Hordes
 		#region EVENT HANDLERS
 		void OnNotifiedTriggerStay(Collider col)
 		{
-			if (col.GetComponentInChildren<Character>() != null || col.GetComponentInChildren<PlayerController>() != null)
+			if (col.GetComponentInChildren<Ammunition>() != null || col.GetComponentInChildren<PlayerController>() != null)
 			{
 				// Reset timeout
 			}

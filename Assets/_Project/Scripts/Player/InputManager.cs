@@ -17,6 +17,18 @@ namespace Hordes
         {
 			ProcessMovement();
 			ProcessAbilities();
+
+            if (Input.GetKeyDown(KeyCode.T) && Input.GetKey(KeyCode.LeftShift))
+            {
+                if (Time.timeScale > 0.1f)
+                {
+                    Time.timeScale = 0.1f;
+                }
+                else
+                {
+                    Time.timeScale = 1f;
+                }
+            }
 		}
 		#endregion
 

@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4068619640418280}
   - component: {fileID: 54072950935486022}
   - component: {fileID: 136098853096118008}
-  - component: {fileID: 114222699599899026}
+  - component: {fileID: 114814083665846758}
   m_Layer: 0
-  m_Name: Character
+  m_Name: Standard Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,9 +37,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4970750210287196}
-  - component: {fileID: 114827877404798496}
   m_Layer: 0
-  m_Name: Innocent
+  m_Name: Uncollected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,9 +101,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4822715710803008}
-  - component: {fileID: 114566711264893910}
   m_Layer: 0
-  m_Name: Slave
+  m_Name: Collected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -237,7 +235,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0498f6b3d16aaf94e98f34bb142cc2f7, type: 2}
+  - {fileID: 2100000, guid: 5ac575b3d1b8689458e87edc93f5e42e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -269,7 +267,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b3616d5d6cb49cb49a0af1414ab57b73, type: 2}
+  - {fileID: 2100000, guid: 4b5acd4739ff82047817198f73c72eb6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -326,7 +324,7 @@ Animator:
   m_GameObject: {fileID: 1869233376700972}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b4a07b7b3b6ba564a820ed90e06a66bd, type: 2}
+  m_Controller: {fileID: 22100000, guid: ec379939bc3f4cd4b98c57a3e990f7c8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -343,7 +341,7 @@ Animator:
   m_GameObject: {fileID: 1727845997827422}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b4a07b7b3b6ba564a820ed90e06a66bd, type: 2}
+  m_Controller: {fileID: 22100000, guid: ec379939bc3f4cd4b98c57a3e990f7c8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -351,7 +349,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114222699599899026
+--- !u!114 &114814083665846758
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -359,42 +357,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1051079940581816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7350dcc4b85aea4c8c30b95cad5bd9d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3961c9a985256824da32fd389743b28f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Slave: {fileID: 114566711264893910}
-  m_Innocent: {fileID: 114827877404798496}
-  m_Body: {fileID: 54072950935486022}
---- !u!114 &114566711264893910
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1869827703649292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cbafd57d3a6ff547844c7caee625615, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Components: {fileID: 114222699599899026}
-  m_Animator: {fileID: 95425232911621694}
+  m_UncollectedModel: {fileID: 1263963229209294}
+  m_CollectedModel: {fileID: 1869827703649292}
   m_SlaveDestroyedEffect: {fileID: 1724568988685490, guid: dc23c848fe397a04c82e9383d176be6c,
     type: 2}
+  m_Body: {fileID: 54072950935486022}
+  m_Animator: {fileID: 95425232911621694}
   m_FollowSmoothing: 5
   m_LookSmoothing: 5
   m_AttackSpeed: 100
---- !u!114 &114827877404798496
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1263963229209294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7baf252a7e3c8dc4a968178f05e742d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Components: {fileID: 114222699599899026}
 --- !u!136 &136098853096118008
 CapsuleCollider:
   m_ObjectHideFlags: 1

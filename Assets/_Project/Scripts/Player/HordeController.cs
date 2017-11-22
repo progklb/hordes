@@ -14,7 +14,7 @@ namespace Hordes
 
         #region PROPERTIES
         private int colCapacity { get { return m_CurrentRow + 1; } }
-		private SlaveCharacter lastSlave { get { return m_Horde.Count > 0 ? m_Horde[m_Horde.Count - 1].m_Components.m_Slave : null; } }
+		private Ammunition lastAmmo { get { return m_Horde.Count > 0 ? m_Horde[m_Horde.Count - 1] : null; } }
         #endregion
 
 
@@ -22,7 +22,7 @@ namespace Hordes
         public float m_RowSpacing = 1;
         public float m_ColSpacing = 1;
 
-        private List<Character> m_Horde = new List<Character>();
+        private List<Ammunition> m_Horde = new List<Ammunition>();
         private int m_CurrentRow = STARTING_ROW;
         private int m_CurrentCol = STARTING_COL;
 
@@ -33,18 +33,21 @@ namespace Hordes
         #region UNITY EVENTS
         void Start()
         {
-            Character.onDestroyed += HandleSlavedDestroyed;
+            Ammunition.onDestroyed += HandleSlavedDestroyed;
         }
         #endregion
 
 
         #region PUBLIC API
-        public void Enslave(Character character)
+        public void Collect(Ammunition ammo)
         {
-            var slave = character.BecomeSlave();
-            m_Horde.Add(character);
+            if (!ammo.isCollected)
+            {
+                ammo.Collect();
+                m_Horde.Add(ammo);
 
-            ResetFormation();
+                ResetFormation();
+            }
 		}
 		#endregion
 
@@ -54,14 +57,14 @@ namespace Hordes
 		{
 			m_AttackReady = ready;
 
-			foreach (var slave in m_Horde)
+            foreach (var ammo in m_Horde)
 			{
-				slave.m_Components.m_Slave.SetAttackReady(ready);
+				ammo.SetAttackReady(ready);
 			}
 
-			if (lastSlave != null)
+			if (lastAmmo != null)
 			{
-				lastSlave.SetAttackSet(ready);
+				lastAmmo.SetAttackSet(ready);
 			}
 		}
 
@@ -70,16 +73,16 @@ namespace Hordes
 			if (m_AttackReady)
 			{
 				// Shoot
-				if (lastSlave != null)
+				if (lastAmmo != null)
 				{
-					lastSlave.Attack(targetPos);
+					lastAmmo.Attack(targetPos);
 					m_Horde.RemoveAt(m_Horde.Count - 1);
 					RecalculatePreviousPosition();
 
-					if (lastSlave != null)
+					if (lastAmmo != null)
 					{
-						// Select next slave for shooting
-						lastSlave.SetAttackSet(true);
+						// Select next round for shooting
+						lastAmmo.SetAttackSet(true);
 					}
 				}
 			}
@@ -88,7 +91,7 @@ namespace Hordes
 
 
 		#region HELPER FUNCTIONS
-        void HandleSlavedDestroyed(Character slave)
+        void HandleSlavedDestroyed(Ammunition slave)
         {
             m_Horde.Remove(slave);
             ResetFormation();
@@ -137,12 +140,12 @@ namespace Hordes
             m_CurrentRow = STARTING_ROW;
             m_CurrentCol = STARTING_COL;
 
-            foreach (var slave in m_Horde)
+            foreach (var ammo in m_Horde)
             {
-                slave.m_Components.m_Slave.Initialise(transform, GetNextPosition());
+                ammo.Initialise(transform, GetNextPosition());
 
-                lastSlave.SetAttackReady(m_AttackReady);
-                lastSlave.SetAttackSet(m_AttackReady && slave == lastSlave);
+                lastAmmo.SetAttackReady(m_AttackReady);
+                lastAmmo.SetAttackSet(m_AttackReady && ammo == lastAmmo);
             }
         }
         #endregion

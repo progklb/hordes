@@ -1016,7 +1016,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 0.7647059, g: 0.9026368, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -1305,22 +1305,6 @@ Prefab:
     - target: {fileID: 4694391514615754, guid: c630b75454c29054ca7180d2e349a9a0, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1410700998761272, guid: c630b75454c29054ca7180d2e349a9a0, type: 2}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1509632098411722, guid: c630b75454c29054ca7180d2e349a9a0, type: 2}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1977944646588210, guid: c630b75454c29054ca7180d2e349a9a0, type: 2}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304250405890654, guid: c630b75454c29054ca7180d2e349a9a0, type: 2}
-      propertyPath: m_Layer
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c630b75454c29054ca7180d2e349a9a0, type: 2}
@@ -2604,7 +2588,7 @@ Prefab:
     - target: {fileID: 65235400432767328, guid: d133f944ffdf98d46be21987662028be,
         type: 2}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1885361403492980, guid: d133f944ffdf98d46be21987662028be, type: 2}
       propertyPath: m_Layer
@@ -2714,8 +2698,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.7
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10

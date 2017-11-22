@@ -19,18 +19,15 @@ namespace Hordes
 		#region UNITY EVENTS
 		void Start()
 		{
-			CharacterNotifier.onCharacterTouched += OnCharacterTouched;
+			AmmunitionNotifier.onAmmoTouched += OnAmmoTouched;
 		}
 		#endregion
 
 
 		#region EVENT HANDLERS
-		void OnCharacterTouched(Character character)
+        void OnAmmoTouched(Ammunition ammo)
         {
-            if (character.isInnocent)
-            {
-                m_HordeController.Enslave(character);
-            }
+            m_HordeController.Collect(ammo);
         }
 		#endregion
 
