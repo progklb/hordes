@@ -10,5 +10,7 @@ namespace Hordes
         public const int ENVIRONMENT_NO_COLLISION = 9;
 
         public const int PLAYER = 10;
+        public const int AMMUNITION= 11;
+        public const int ENEMY = 12;
     }
 }

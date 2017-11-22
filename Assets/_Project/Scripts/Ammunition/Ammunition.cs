@@ -34,9 +34,12 @@ namespace Hordes
 
         public Rigidbody m_Body;
         public Animator m_Animator;
-       
+
+        [Space(10)]
         public float m_FollowSmoothing = 5f;
         public float m_LookSmoothing = 5f;
+
+        public int m_Damage = 1;
 
         protected Transform m_Transform;
 

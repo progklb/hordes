@@ -6,5 +6,11 @@ AnimatorOverrideController:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: StdAmmoController
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: c230f9fd56407114a92c01793a471955, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 3029293c06b831140a1d7e79da4fcdbe, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3029293c06b831140a1d7e79da4fcdbe, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 7b437406a7f03774cb3ffac9ac7bd1da, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7b437406a7f03774cb3ffac9ac7bd1da, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 11eeabc4b895d2145ba8cd1dbb5b3b33, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 11eeabc4b895d2145ba8cd1dbb5b3b33, type: 2}

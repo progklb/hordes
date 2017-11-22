@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
 
+using Utilities;
+
 namespace Hordes
 {
 	[RequireComponent(typeof(HordeController))]
     public class PlayerController : MonoBehaviour
     {
+        #region PROPERTIES
+        public static PlayerController instance { get; private set; }
+        #endregion
+
+
         #region VARIABLES
         public HordeController m_HordeController;
 		public Rigidbody m_Body;
@@ -19,8 +26,22 @@ namespace Hordes
 		#region UNITY EVENTS
 		void Start()
 		{
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                LogContext.LogErrorFormat(this, "There is more than one player instance in the scene!");
+            }
+
 			AmmunitionNotifier.onAmmoTouched += OnAmmoTouched;
 		}
+
+        void OnDestroy()
+        {
+            instance = null;
+        }
 		#endregion
 
 

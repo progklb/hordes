@@ -3434,7 +3434,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 426fab3b157478647b4f405b380121ea, type: 2}
+  - {fileID: 2100000, guid: 0009ffb899b48fc47b2dce92b2a35b0e, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0

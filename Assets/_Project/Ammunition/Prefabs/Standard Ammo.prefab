@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 54072950935486022}
   - component: {fileID: 136098853096118008}
   - component: {fileID: 114814083665846758}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Standard Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4970750210287196}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Uncollected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4263301585244106}
   - component: {fileID: 33946485532903216}
   - component: {fileID: 23707555305080814}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4429102698932576}
   - component: {fileID: 95761825989003868}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4628648398384774}
   - component: {fileID: 95425232911621694}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4822715710803008}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Collected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 4971102300015244}
   - component: {fileID: 33998019453139904}
   - component: {fileID: 23486022307091882}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,6 +368,7 @@ MonoBehaviour:
   m_Animator: {fileID: 95425232911621694}
   m_FollowSmoothing: 5
   m_LookSmoothing: 5
+  m_Damage: 1
   m_AttackSpeed: 100
 --- !u!136 &136098853096118008
 CapsuleCollider:

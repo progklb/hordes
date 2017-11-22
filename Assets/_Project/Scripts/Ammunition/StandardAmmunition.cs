@@ -10,15 +10,22 @@ namespace Hordes
 
 
         #region UNITY EVENTS
-        public void OnTriggerEnter(Collider col)
+        void OnTriggerEnter(Collider col)
         {
-            if (col.gameObject.layer == Layers.ENVIRONMENT)
+            if (isCollected)
             {
-                if (isCollected)
+                switch (col.gameObject.layer)
                 {
-                    DestroySelf();
+                    case Layers.ENVIRONMENT:
+                        DestroySelf();
+                        break;
+                    case Layers.ENEMY:
+                        col.gameObject.GetComponentInChildren<Enemy>().TakeDamage(m_Damage);
+                        DestroySelf();
+                        break;
                 }
             }
+
         }
         #endregion
 
