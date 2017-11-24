@@ -5,13 +5,15 @@ namespace Hordes
     public class CameraInput : MonoBehaviour
     {
         #region PROPERTIES
-        public Vector3 PointerPosition { get; private set; }
+        public Vector3 cameraFacingDir { get { return m_CameraTransform.forward; } }
+        public Vector3 pointerPosition { get; private set; }
         #endregion
 
 
         #region VARIABLES
         [SerializeField]
         private Camera m_Camera;
+        private Transform m_CameraTransform;
 
         [SerializeField]
         private bool m_DrawDebugIndicator;
@@ -25,6 +27,8 @@ namespace Hordes
         #region UNITY EVENTS
         void Start()
         {
+            m_CameraTransform = m_Camera.transform;
+
             if (m_DrawDebugIndicator)
             {
                 m_DebugIndicator = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -43,16 +47,14 @@ namespace Hordes
 
             if (Physics.Raycast(m_Ray, out m_Hit) )
             {
-                PointerPosition = m_Hit.point;
+                pointerPosition = m_Hit.point;
             }
 
             if (m_DrawDebugIndicator)
             {
-                m_DebugIndicator.transform.position = PointerPosition;
+                m_DebugIndicator.transform.position = pointerPosition;
             }
         }
         #endregion
-
-
     }
 }

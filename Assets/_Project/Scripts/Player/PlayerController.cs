@@ -9,6 +9,8 @@ namespace Hordes
     {
         #region PROPERTIES
         public static PlayerController instance { get; private set; }
+
+        public Vector3 facingDir { get { return m_Body.transform.forward; } }
         #endregion
 
 
