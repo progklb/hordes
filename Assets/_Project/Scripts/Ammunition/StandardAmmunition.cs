@@ -25,7 +25,6 @@ namespace Hordes
                         break;
                 }
             }
-
         }
         #endregion
 

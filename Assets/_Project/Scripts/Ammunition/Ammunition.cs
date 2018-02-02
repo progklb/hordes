@@ -30,7 +30,8 @@ namespace Hordes
         #region VARIABLES
         public GameObject m_UncollectedModel;
         public GameObject m_CollectedModel;
-        public GameObject m_SlaveDestroyedEffect;
+        public GameObject m_AmmoDestroyedEffect;
+        public GameObject m_AmmoCollectedEffect;
 
         public Rigidbody m_Body;
         public Animator m_Animator;
@@ -43,7 +44,7 @@ namespace Hordes
 
         protected Transform m_Transform;
 
-        private Transform m_FollowTarget;
+        public Transform m_FollowTarget;
         private Vector3 m_FollowOffset;
         #endregion
 
@@ -61,19 +62,22 @@ namespace Hordes
 
         void FixedUpdate()
         {
-            if (isFired)
+			if (isFired)
             {
                 return;
             }
 
             if (isCollected)
             {
-                m_Body.position = Vector3.Lerp(
+				Debug.DrawLine(m_Body.position, m_FollowTarget.position, Color.red, Time.smoothDeltaTime);
+				Debug.DrawRay(m_FollowTarget.position, Vector3.up, Color.red, Time.smoothDeltaTime);
+				
+				m_Body.position = Vector3.Lerp(
                     m_Body.position,
                     m_FollowTarget.TransformPoint(m_FollowOffset),
                     Time.deltaTime * m_FollowSmoothing);
 
-                m_Transform.forward = Vector3.Lerp(m_Transform.forward, m_FollowTarget.forward, Time.deltaTime * m_LookSmoothing);
+				m_Body.rotation = m_FollowTarget.rotation;
             }
         }
         #endregion
@@ -84,6 +88,9 @@ namespace Hordes
         {
             m_UncollectedModel.SetActive(false);
             m_CollectedModel.SetActive(true);
+
+            var effect = Instantiate(m_AmmoCollectedEffect, EffectsManager.instance.transform);
+            effect.transform.position = m_Body.position;
 
             isCollected = true;
             onCollected(this);
@@ -99,7 +106,7 @@ namespace Hordes
 
         public virtual void DestroySelf()
         {
-            var effect = Instantiate(m_SlaveDestroyedEffect, EffectsManager.instance.transform);
+            var effect = Instantiate(m_AmmoDestroyedEffect, EffectsManager.instance.transform);
             effect.transform.position = m_Body.position - m_Body.velocity.normalized * 2;
             effect.transform.rotation = m_Body.rotation;
 

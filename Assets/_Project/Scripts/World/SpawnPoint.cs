@@ -11,7 +11,7 @@ namespace Hordes
 		#region TYPES
 		public enum SpawnType
 		{
-			Innocent
+			Ammo
 		}
 		#endregion
 
@@ -36,7 +36,10 @@ namespace Hordes
 			for (;;)
 			{
 				yield return new WaitForSeconds(m_SpawnDelay);
-				Spawn();
+				if (SpawnManager.instance.m_IsSpawning)
+				{
+					Spawn();
+				}
 			}
 		}
 		#endregion
@@ -58,7 +61,7 @@ namespace Hordes
 		{
 			switch (m_Type)
 			{
-				case SpawnType.Innocent:
+				case SpawnType.Ammo:
 					Instantiate(AssetProvider.instance.innocentPrefab, m_SpawnLocation.position, m_SpawnLocation.rotation);
 					break;
 			}

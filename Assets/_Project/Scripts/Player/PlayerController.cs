@@ -4,7 +4,7 @@ using Utilities;
 
 namespace Hordes
 {
-	[RequireComponent(typeof(HordeController))]
+	[RequireComponent(typeof(AmmoController))]
     public class PlayerController : MonoBehaviour
     {
         #region PROPERTIES
@@ -15,7 +15,7 @@ namespace Hordes
 
 
         #region VARIABLES
-        public HordeController m_HordeController;
+        public AmmoController m_AmmoController;
 		public Rigidbody m_Body;
 
 		public float m_MovementSpeed = 500;
@@ -50,7 +50,7 @@ namespace Hordes
 		#region EVENT HANDLERS
         void OnAmmoTouched(Ammunition ammo)
         {
-            m_HordeController.Collect(ammo);
+            m_AmmoController.Collect(ammo);
         }
 		#endregion
 
@@ -58,12 +58,12 @@ namespace Hordes
 		#region ATTACKING
 		public void SetAttackReady(bool ready)
 		{
-			m_HordeController.SetAttackReady(ready);
+			m_AmmoController.SetAttackReady(ready);
 		}
 
 		public void Attack(Vector3 targetPos)
 		{
-			m_HordeController.Attack(targetPos);
+			m_AmmoController.Attack(targetPos);
 		}
 		#endregion
 
