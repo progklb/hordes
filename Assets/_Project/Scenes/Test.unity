@@ -3028,11 +3028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1619729a33c989344a259b35f715cbc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlayerMaterial: {fileID: 2100000, guid: db0393de77f10d741992228de68f1d4f, type: 2}
-  m_InnocentMaterial: {fileID: 2100000, guid: 0498f6b3d16aaf94e98f34bb142cc2f7, type: 2}
-  m_HeroMaterial: {fileID: 2100000, guid: 366f04ab5842c854badf210417b9d5dd, type: 2}
-  m_SlaveMaterial: {fileID: 2100000, guid: b3616d5d6cb49cb49a0af1414ab57b73, type: 2}
-  m_InnocentPrefab: {fileID: 1051079940581816, guid: f4438f0f789da6c4ab5d880774972307,
+  m_StdAmmoPrefab: {fileID: 1051079940581816, guid: f4438f0f789da6c4ab5d880774972307,
     type: 2}
 --- !u!4 &1951215358 stripped
 Transform:

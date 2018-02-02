@@ -9,12 +9,12 @@ namespace Hordes
         #region PROPERTIES
         public static AssetProvider instance { get; private set; }
 
-		public GameObject innocentPrefab { get { return m_InnocentPrefab; } }
+		public GameObject stdAmmoPrefab { get { return m_StdAmmoPrefab; } }
 		#endregion
 
 
 		#region VARIABLES
-		[SerializeField] private GameObject m_InnocentPrefab;
+		[SerializeField] private GameObject m_StdAmmoPrefab;
 		#endregion
 
 

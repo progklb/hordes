@@ -231,6 +231,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -246,6 +247,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -263,6 +265,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -278,6 +281,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -362,15 +366,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UncollectedModel: {fileID: 1263963229209294}
   m_CollectedModel: {fileID: 1869827703649292}
-  m_SlaveDestroyedEffect: {fileID: 1724568988685490, guid: dc23c848fe397a04c82e9383d176be6c,
+  m_AmmoDestroyedEffect: {fileID: 1724568988685490, guid: dc23c848fe397a04c82e9383d176be6c,
     type: 2}
-  m_SlaveCollectedEffect: {fileID: 1548334649436152, guid: b8b998c86235fe741b477e94741ffb9a,
+  m_AmmoCollectedEffect: {fileID: 1548334649436152, guid: b8b998c86235fe741b477e94741ffb9a,
     type: 2}
   m_Body: {fileID: 54072950935486022}
   m_Animator: {fileID: 95425232911621694}
   m_FollowSmoothing: 5
   m_LookSmoothing: 5
   m_Damage: 1
+  m_FollowTarget: {fileID: 0}
   m_AttackSpeed: 100
 --- !u!136 &136098853096118008
 CapsuleCollider:

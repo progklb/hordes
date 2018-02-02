@@ -62,7 +62,7 @@ namespace Hordes
 			switch (m_Type)
 			{
 				case SpawnType.Ammo:
-					Instantiate(AssetProvider.instance.innocentPrefab, m_SpawnLocation.position, m_SpawnLocation.rotation);
+					Instantiate(AssetProvider.instance.stdAmmoPrefab, m_SpawnLocation.position, m_SpawnLocation.rotation);
 					break;
 			}
 		}
