@@ -10,11 +10,13 @@ namespace Hordes
         public static AssetProvider instance { get; private set; }
 
 		public GameObject stdAmmoPrefab { get { return m_StdAmmoPrefab; } }
+		public GameObject stdEnemyPrefab { get { return m_StdEnemyPrefab; } }
 		#endregion
 
 
 		#region VARIABLES
 		[SerializeField] private GameObject m_StdAmmoPrefab;
+		[SerializeField] private GameObject m_StdEnemyPrefab;
 		#endregion
 
 

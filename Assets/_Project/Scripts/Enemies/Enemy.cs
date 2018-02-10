@@ -7,38 +7,34 @@ using UnityEngine.AI;
 namespace Hordes
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class Enemy : MonoBehaviour 
+    public abstract class Enemy : MonoBehaviour 
     {
         #region VARIABLES
-        public int m_Life = 2;
-        private NavMeshAgent m_Agent;
+        public int m_Life = 1;
+		public GameObject m_DeathEffect;
+
+        protected NavMeshAgent m_Agent;
         #endregion
 
 
         #region UNITY EVENTS
-        void Start()
-        {
-            m_Agent = GetComponent<NavMeshAgent>();
-        }
+        protected virtual void Start()
+		{
+			m_Agent = GetComponent<NavMeshAgent>();
+		}
 
-        void Update()
-        {
-            if (PlayerController.instance != null)
-            {
-                m_Agent.destination = PlayerController.instance.transform.position;
-            }
-        }
+		protected abstract void Update();
         #endregion
 
 
         #region PUBLIC API
-        public bool TakeDamage(int damage)
+        public virtual bool TakeDamage(int damage, Vector3 damageDir = default(Vector3))
         {
             m_Life -= damage;
 
             if (m_Life <= 0)
             {
-                DestroySelf();
+                DestroySelf(damageDir);
             }
 
             return false;
@@ -47,9 +43,16 @@ namespace Hordes
 
 
         #region HELPER FUNCTIONS
-        void DestroySelf()
+        protected virtual void DestroySelf(Vector3 damageDir = default(Vector3))
         {
-            Destroy(gameObject);
+			if (m_DeathEffect != null && damageDir != default(Vector3))
+			{
+				var effect = Instantiate(m_DeathEffect); 
+				effect.transform.position = transform.position;
+				effect.transform.forward = damageDir;
+			}
+
+			Destroy(gameObject);
         }
         #endregion
     }
