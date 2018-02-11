@@ -4,9 +4,13 @@ namespace Hordes
 {
     public class InputManager : MonoBehaviour
     {
-        #region VARIABLES
-        public CameraInput m_CamInput;
-		public PlayerController m_Player;
+		#region PROPERTIES
+		public Player player {  get { return Player.instance; } }
+		#endregion
+
+
+		#region VARIABLES
+		public CameraInput m_CamInput;
 
         /// Reverses movement based on the facing direction of the player with regards to the camera.
         public bool m_ReverseInputWithDir = true;
@@ -16,6 +20,11 @@ namespace Hordes
         #region UNITY EVENTS
         void Update()
         {
+			if (player == null)
+			{
+				return;
+			}
+
             IsFacingCamera();
 
 			ProcessMovement();
@@ -32,26 +41,26 @@ namespace Hordes
 		#region HELPER FUNCTIONS
 		void ProcessMovement()
 		{
-			m_Player.SetSprinting(Input.GetKey(KeyCode.LeftShift));
+			player.SetSprinting(Input.GetKey(KeyCode.LeftShift));
 
             if (Input.GetKey(KeyCode.W))
             {
-                m_Player.Move(m_Player.m_Body.transform.forward);
+				player.Move(player.m_Body.transform.forward);
             }
 			if (Input.GetKey(KeyCode.A))
 			{
-                m_Player.Move(m_Player.m_Body.transform.right * (IsFacingCamera() && m_ReverseInputWithDir ? 1f : -1f));
+				player.Move(player.m_Body.transform.right * (IsFacingCamera() && m_ReverseInputWithDir ? 1f : -1f));
 			}
 			if (Input.GetKey(KeyCode.S))
 			{
-                m_Player.Move(-m_Player.m_Body.transform.forward);
+				player.Move(-player.m_Body.transform.forward);
 			}
 			if (Input.GetKey(KeyCode.D))
 			{
-                m_Player.Move(m_Player.m_Body.transform.right * (IsFacingCamera() && m_ReverseInputWithDir ? -1f : 1f));
+				player.Move(player.m_Body.transform.right * (IsFacingCamera() && m_ReverseInputWithDir ? -1f : 1f));
 			}
 
-			m_Player.SetLookDirection(m_CamInput.pointerPosition - m_Player.transform.position);
+			player.SetLookDirection(m_CamInput.pointerPosition - player.transform.position);
 
 			return;
 		}
@@ -60,16 +69,16 @@ namespace Hordes
 		{
 			if (Input.GetMouseButtonDown(1))
 			{
-				m_Player.SetAttackReady(true);
+				player.SetAttackReady(true);
 			}
 			else if (Input.GetMouseButtonUp(1))
 			{
-				m_Player.SetAttackReady(false);
+				player.SetAttackReady(false);
 			}
 
 			if (Input.GetMouseButtonDown(0))
 			{
-				m_Player.Attack(m_CamInput.pointerPosition);
+				player.Attack(m_CamInput.pointerPosition);
 			}
 		}
 		#endregion
@@ -78,7 +87,7 @@ namespace Hordes
         #region HELPER FUNCTIONS
         bool IsFacingCamera()
         {
-            var dot = Vector3.Dot(m_Player.facingDir, m_CamInput.cameraFacingDir);
+            var dot = Vector3.Dot(player.facingDir, m_CamInput.cameraFacingDir);
             return dot <= 0f;
         }
         #endregion

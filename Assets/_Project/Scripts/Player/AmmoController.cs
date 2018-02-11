@@ -35,11 +35,16 @@ namespace Hordes
         {
             Ammunition.onDestroyed += HandleAmmoDestroyed;
         }
-        #endregion
+
+		void OnDestroy()
+		{
+            Ammunition.onDestroyed -= HandleAmmoDestroyed;
+		}
+		#endregion
 
 
-        #region PUBLIC API
-        public void Collect(Ammunition ammo)
+		#region PUBLIC API
+		public void Collect(Ammunition ammo)
         {
             if (!ammo.isCollected)
             {

@@ -58,7 +58,7 @@ namespace Hordes
 		bool ShouldToggleCanSpawn(Collider col)
 		{
 			// Check if the collision is caused by the player or the player's ammo.
-			return col.GetComponentInChildren<Ammunition>() != null || col.GetComponentInChildren<PlayerController>() != null;
+			return col.GetComponentInChildren<Ammunition>() != null || col.GetComponentInChildren<Player>() != null;
 		}
 		#endregion
 	}

@@ -1,16 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Hordes
 {
-    [RequireComponent(typeof(NavMeshAgent))]
-    public abstract class Enemy : MonoBehaviour 
-    {
-        #region VARIABLES
-        public int m_Life = 1;
+	[RequireComponent(typeof(NavMeshAgent))]
+	public abstract class Enemy : MonoBehaviour
+	{
+		#region EVENTS
+		public static Action<Enemy> onEnemyDestroyed = delegate { };
+		#endregion 
+
+	
+		#region VARIABLES
+		public int m_Life = 1;
 		public GameObject m_DeathEffect;
 
         protected NavMeshAgent m_Agent;
@@ -24,11 +28,21 @@ namespace Hordes
 		}
 
 		protected abstract void Update();
-        #endregion
+
+		private void OnTriggerEnter(Collider col)
+		{
+			var player = col.GetComponentInChildren<Player>();
+			if (player != null)
+			{
+				player.TakeDamage();
+				TakeDamage(1, transform.forward);
+			}
+		}
+		#endregion
 
 
-        #region PUBLIC API
-        public virtual bool TakeDamage(int damage, Vector3 damageDir = default(Vector3))
+		#region PUBLIC API
+		public virtual bool TakeDamage(int damage, Vector3 damageDir = default(Vector3))
         {
             m_Life -= damage;
 

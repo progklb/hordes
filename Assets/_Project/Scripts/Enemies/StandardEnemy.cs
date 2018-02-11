@@ -5,10 +5,15 @@
         #region UNITY EVENTS
         protected override void Update()
         {
-            if (PlayerController.instance != null)
+            if (Player.isAlive)
             {
-                m_Agent.destination = PlayerController.instance.transform.position;
+				m_Agent.isStopped = false;
+				m_Agent.destination = Player.instance.transform.position;
             }
+			else
+			{
+				m_Agent.isStopped = true;
+			}
         }
         #endregion
     }

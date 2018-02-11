@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198718410110264072}
   - component: {fileID: 199259365341819428}
   m_Layer: 0
-  m_Name: AmmoCollectedEffect
+  m_Name: Std Ammo Collected Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

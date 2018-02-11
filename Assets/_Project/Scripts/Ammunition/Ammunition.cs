@@ -62,12 +62,12 @@ namespace Hordes
 
         void FixedUpdate()
         {
-			if (isFired)
+			if (isFired || !Player.isAlive)
             {
                 return;
             }
 
-            if (isCollected)
+            if (isCollected && m_FollowTarget != null)
             {
 				Debug.DrawLine(m_Body.position, m_FollowTarget.position, Color.red, Time.smoothDeltaTime);
 				Debug.DrawRay(m_FollowTarget.position, Vector3.up, Color.red, Time.smoothDeltaTime);

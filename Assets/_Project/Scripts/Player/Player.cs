@@ -1,14 +1,22 @@
 ﻿using UnityEngine;
 
+using System;
+
 using Utilities;
 
 namespace Hordes
 {
 	[RequireComponent(typeof(AmmoController))]
-    public class PlayerController : MonoBehaviour
+    public class Player : MonoBehaviour
     {
-        #region PROPERTIES
-        public static PlayerController instance { get; private set; }
+		#region EVENTS
+		public static event Action onPlayerDeath = delegate { };
+		#endregion
+
+
+		#region PROPERTIES
+		public static Player instance { get; private set; }
+		public static bool isAlive {  get { return instance != null; } }
 
         public Vector3 facingDir { get { return m_Body.transform.forward; } }
         #endregion
@@ -18,10 +26,11 @@ namespace Hordes
         public AmmoController m_AmmoController;
 		public Rigidbody m_Body;
 
+		public GameObject m_DeathEffect;
+
 		public float m_MovementSpeed = 500;
 		public float m_SprintScaler = 2;
-
-		private bool m_Sprinting;
+		private bool m_IsSprinting;
 		#endregion
 
 
@@ -31,24 +40,26 @@ namespace Hordes
             if (instance == null)
             {
                 instance = this;
-            }
-            else
+
+				AmmunitionNotifier.onAmmoTouched += OnAmmoTouched;
+			}
+			else
             {
                 LogContext.LogErrorFormat(this, "There is more than one player instance in the scene!");
             }
-
-			AmmunitionNotifier.onAmmoTouched += OnAmmoTouched;
 		}
 
         void OnDestroy()
         {
             instance = null;
-        }
+
+			AmmunitionNotifier.onAmmoTouched -= OnAmmoTouched;
+		}
 		#endregion
 
 
 		#region EVENT HANDLERS
-        void OnAmmoTouched(Ammunition ammo)
+		void OnAmmoTouched(Ammunition ammo)
         {
             m_AmmoController.Collect(ammo);
         }
@@ -76,7 +87,7 @@ namespace Hordes
 
 		public void SetSprinting(bool sprinting)
 		{
-			m_Sprinting = sprinting;
+			m_IsSprinting = sprinting;
 		}
 
 		public void SetLookDirection(Vector3 direction)
@@ -86,7 +97,18 @@ namespace Hordes
 
 		Vector3 NormalizeMovement(Vector3 force)
 		{
-			return force * m_MovementSpeed * Time.deltaTime * (m_Sprinting ? m_SprintScaler : 1f);
+			return force * m_MovementSpeed * Time.deltaTime * (m_IsSprinting ? m_SprintScaler : 1f);
+		}
+		#endregion
+
+
+		#region OTHER
+		public void TakeDamage()
+		{
+			onPlayerDeath();
+
+			Instantiate(m_DeathEffect, transform.position, Quaternion.identity);
+			Destroy(m_Body.gameObject);
 		}
 		#endregion
 	}

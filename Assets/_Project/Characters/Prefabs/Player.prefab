@@ -143,6 +143,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -158,6 +159,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -216,8 +218,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962c4e6dfe1518649990058f904ecb01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HordeController: {fileID: 114386506947982362}
+  m_AmmoController: {fileID: 114386506947982362}
   m_Body: {fileID: 54807616404667378}
+  m_DeathEffect: {fileID: 1724568988685490, guid: d04f9b8d875ef664e91b18c97bf827f2,
+    type: 2}
   m_MovementSpeed: 500
   m_SprintScaler: 2
 --- !u!114 &114386506947982362
