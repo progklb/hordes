@@ -4,6 +4,7 @@ using System;
 
 namespace Hordes
 {
+	[RequireComponent(typeof(Rigidbody))]
     public class Ammunition : MonoBehaviour
     {
         #region CONSTANTS
@@ -15,45 +16,59 @@ namespace Hordes
 
         #region EVENTS
         public static event Action<Ammunition> onDestroyed = delegate { };
-        public static event Action<Ammunition> onCollected = delegate { };
-        #endregion
+
+		public event Action onCollected = delegate { };
+		#endregion
 
 
-        #region PROPERTIES
-        /// Has this item been collected by the player?
-        public bool isCollected { get; private set; }
+		#region PROPERTIES
+		/// Has this item been collected by the player?
+		public bool isCollected { get; private set; }
         /// Has this item been shot?
         public bool isFired { get; private set; }
-        #endregion
+		/// The damage value that this ammunition deals
+		public int damage { get { return m_Damage; } }
+		/// The <see cref="Rigibody"/> of this instance.
+		public Rigidbody body { get { return m_Body; } }
+		#endregion
 
 
-        #region VARIABLES
-        public GameObject m_UncollectedModel;
-        public GameObject m_CollectedModel;
-        public GameObject m_AmmoDestroyedEffect;
-        public GameObject m_AmmoCollectedEffect;
+		#region VARIABLES
+		[SerializeField] private GameObject m_UncollectedModel;
+		[SerializeField] private GameObject m_CollectedModel;
+		[SerializeField] private Animator m_Animator;
 
-        public Rigidbody m_Body;
-        public Animator m_Animator;
+		[Space(10)]
+		[Header("Optional Overrides")]
+		[SerializeField] private GameObject m_SpawnedEffect;
+		[SerializeField] private GameObject m_CollectedEffect;
+		[SerializeField] private GameObject m_DestroyedEffect;
 
-        [Space(10)]
-        public float m_FollowSmoothing = 5f;
-        public float m_LookSmoothing = 5f;
+		[Space(10)]
+		[SerializeField] private float m_FollowSmoothing = 5f;
+		[SerializeField] private int m_Damage = 1;
 
-        public int m_Damage = 1;
-
-        protected Transform m_Transform;
-
-        public Transform m_FollowTarget;
+		private Transform m_FollowTarget;
         private Vector3 m_FollowOffset;
-        #endregion
+
+		protected Rigidbody m_Body;
+		protected Transform m_Transform;
+		#endregion
 
 
-        #region UNITY EVENTS
-        protected virtual void Start()
+		#region UNITY EVENTS
+		protected virtual void Start()
         {
+			m_Body = GetComponent<Rigidbody>();
             m_Transform = transform;
-        }
+
+			// Apply default values if there are no overrides
+			if (m_SpawnedEffect == null)	m_SpawnedEffect = AssetProvider.instance.ammoSpawnedEffectPrefab;
+			if (m_CollectedEffect == null)	m_CollectedEffect = AssetProvider.instance.ammoCollectedEffectPrefab;
+			if (m_DestroyedEffect == null)	m_DestroyedEffect = AssetProvider.instance.ammoDestroyedEffectPrefab;
+
+			EffectsManager.instance.Instantiate(m_SpawnedEffect, transform.position, transform.rotation);
+		}
 
         protected virtual void OnDestroy()
         {
@@ -89,11 +104,10 @@ namespace Hordes
             m_UncollectedModel.SetActive(false);
             m_CollectedModel.SetActive(true);
 
-            var effect = Instantiate(m_AmmoCollectedEffect, EffectsManager.instance.transform);
-            effect.transform.position = m_Body.position;
+			EffectsManager.instance.Instantiate(m_CollectedEffect, m_Body.position);
 
             isCollected = true;
-            onCollected(this);
+            onCollected();
 
             return this;
         }
@@ -106,7 +120,7 @@ namespace Hordes
 
         public virtual void DestroySelf()
         {
-            var effect = Instantiate(m_AmmoDestroyedEffect, EffectsManager.instance.transform);
+            var effect = Instantiate(m_DestroyedEffect, EffectsManager.instance.transform);
             effect.transform.position = m_Body.position - m_Body.velocity.normalized * 2;
             effect.transform.rotation = m_Body.rotation;
 
@@ -128,7 +142,6 @@ namespace Hordes
 
         public virtual void Attack(Vector3 targetPosition)
         {
-            // Shoot at target
             isFired = true;
             m_Animator.SetBool(ANIM_ATTACK, true);
         }

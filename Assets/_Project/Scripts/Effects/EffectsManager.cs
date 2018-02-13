@@ -22,5 +22,21 @@ namespace Hordes
 			}
 		}
 		#endregion
+
+
+		#region PUBLIC API
+		public GameObject Instantiate(GameObject prefab, Vector3 position, Quaternion rotation = default(Quaternion))
+		{
+			var effect = Instantiate(prefab, transform);
+			effect.transform.position = position;
+
+			if (rotation != default(Quaternion))
+			{
+				effect.transform.rotation = rotation;
+			}
+
+			return effect;
+		}
+		#endregion
 	}
 }

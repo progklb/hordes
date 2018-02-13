@@ -10,10 +10,10 @@ namespace Hordes
 
 
 		#region VARIABLES
-		public CameraInput m_CamInput;
+		[SerializeField] private CameraInput m_CamInput;
 
-        /// Reverses movement based on the facing direction of the player with regards to the camera.
-        public bool m_ReverseInputWithDir = true;
+		/// Reverses movement based on the facing direction of the player with regards to the camera.
+		[SerializeField] private bool m_ReverseInputWithDir = true;
         #endregion
 
 
@@ -45,19 +45,19 @@ namespace Hordes
 
             if (Input.GetKey(KeyCode.W))
             {
-				player.Move(player.m_Body.transform.forward);
+				player.Move(player.body.transform.forward);
             }
 			if (Input.GetKey(KeyCode.A))
 			{
-				player.Move(player.m_Body.transform.right * (IsFacingCamera() && m_ReverseInputWithDir ? 1f : -1f));
+				player.Move(player.body.transform.right * (IsFacingCamera() && m_ReverseInputWithDir ? 1f : -1f));
 			}
 			if (Input.GetKey(KeyCode.S))
 			{
-				player.Move(-player.m_Body.transform.forward);
+				player.Move(-player.body.transform.forward);
 			}
 			if (Input.GetKey(KeyCode.D))
 			{
-				player.Move(player.m_Body.transform.right * (IsFacingCamera() && m_ReverseInputWithDir ? -1f : 1f));
+				player.Move(player.body.transform.right * (IsFacingCamera() && m_ReverseInputWithDir ? -1f : 1f));
 			}
 
 			player.SetLookDirection(m_CamInput.pointerPosition - player.transform.position);

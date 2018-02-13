@@ -2,15 +2,16 @@
 
 namespace Hordes
 {
-	public class SpawnManager : MonoBehaviour
+	public class AmmoSpawnManager : MonoBehaviour
 	{
 		#region PROPERTIES
-		public static SpawnManager instance { get; private set; }
+		public static AmmoSpawnManager instance { get; private set; }
 		#endregion
 
 
 		#region VARIABLES
 		public bool m_IsSpawning = true;
+		public float m_SpawnTimeout = 10;
 
 		private AmmoSpawner[] m_SpawnPoints;
 		#endregion
@@ -21,7 +22,7 @@ namespace Hordes
 		{
 			if (instance != null)
 			{
-				Debug.LogFormat("[{0}] This is more than one manager instance in the scene.", typeof(SpawnManager).Name);
+				Debug.LogFormat("[{0}] This is more than one manager instance in the scene.", typeof(AmmoSpawnManager).Name);
 				return;
 			}
 

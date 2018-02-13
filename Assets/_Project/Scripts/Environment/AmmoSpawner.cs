@@ -7,37 +7,53 @@ namespace Hordes
 	public class AmmoSpawner : MonoBehaviour
 	{
 		#region VARIABLES
-		public Transform m_SpawnLocation;
+		[SerializeField]
+		private bool m_SpawnAtStart;
 
-		public float m_SpawnDelay = 30f;
-		public bool m_SpawnAtStart;
+		[SerializeField]
+		private Transform m_SpawnLocation;
+
+		private Ammunition m_CurrentAmmo;
 		#endregion
 
 
 		#region UNITY EVENTS
-		IEnumerator Start()
+		void Start()
 		{
 			if (m_SpawnAtStart)
 			{
 				Spawn();
 			}
-
-			for (;;)
+			else
 			{
-				yield return new WaitForSeconds(m_SpawnDelay);
-				if (SpawnManager.instance.m_IsSpawning)
-				{
-					Spawn();
-				}
+				StartCoroutine(StartSpawnTimeout());
 			}
 		}
 		#endregion
 
 
 		#region HELPER FUNCTIONS
+		IEnumerator StartSpawnTimeout()
+		{
+			yield return new WaitForSeconds(AmmoSpawnManager.instance.m_SpawnTimeout);
+			Spawn();
+		}
+
 		void Spawn()
 		{
-			Instantiate(AssetProvider.instance.stdAmmoPrefab, m_SpawnLocation.position, m_SpawnLocation.rotation);
+			var ammoObj = Instantiate(AssetProvider.instance.stdAmmoPrefab, m_SpawnLocation.position, m_SpawnLocation.rotation);
+
+			m_CurrentAmmo = ammoObj.GetComponentInChildren<Ammunition>();
+			if (m_CurrentAmmo != null)
+			{
+				m_CurrentAmmo.onCollected += OnCollection;
+			}
+		}
+
+		void OnCollection()
+		{
+			m_CurrentAmmo.onCollected -= OnCollection;
+			StartCoroutine(StartSpawnTimeout());
 		}
 		#endregion
 	}

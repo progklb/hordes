@@ -366,16 +366,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UncollectedModel: {fileID: 1263963229209294}
   m_CollectedModel: {fileID: 1869827703649292}
-  m_AmmoDestroyedEffect: {fileID: 1724568988685490, guid: dc23c848fe397a04c82e9383d176be6c,
-    type: 2}
-  m_AmmoCollectedEffect: {fileID: 1548334649436152, guid: b8b998c86235fe741b477e94741ffb9a,
-    type: 2}
-  m_Body: {fileID: 54072950935486022}
   m_Animator: {fileID: 95425232911621694}
   m_FollowSmoothing: 5
   m_LookSmoothing: 5
   m_Damage: 1
-  m_FollowTarget: {fileID: 0}
+  m_AmmoSpawnedEffect: {fileID: 0}
+  m_AmmoCollectedEffect: {fileID: 0}
+  m_AmmoDestroyedEffect: {fileID: 0}
   Speed: 100
 --- !u!136 &136098853096118008
 CapsuleCollider:

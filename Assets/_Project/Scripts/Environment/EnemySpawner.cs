@@ -11,8 +11,8 @@ namespace Hordes
 
 
 		#region VARIABLES
-		public Transform m_SpawnLocation;
-		public GameObject m_SpawnEffect;
+		[SerializeField]
+		private Transform m_SpawnLocation;
 		#endregion
 
 
@@ -52,7 +52,6 @@ namespace Hordes
 		void Spawn()
 		{
 			Instantiate(AssetProvider.instance.stdEnemyPrefab, m_SpawnLocation.position, m_SpawnLocation.rotation);
-			Instantiate(m_SpawnEffect, m_SpawnLocation.position, m_SpawnEffect.transform.rotation);
 		}
 
 		bool ShouldToggleCanSpawn(Collider col)

@@ -19,8 +19,8 @@ namespace Hordes
 
 
         #region VARIABLES
-        public float m_RowSpacing = 1;
-        public float m_ColSpacing = 1;
+		[SerializeField] private float m_RowSpacing = 1;
+		[SerializeField] private float m_ColSpacing = 1;
 
         private List<Ammunition> m_Ammo = new List<Ammunition>();
         private int m_CurrentRow = STARTING_ROW;

@@ -5,7 +5,8 @@ namespace Hordes
     public class StandardAmmunition : Ammunition
     {
 		#region VARIABLES
-		public float Speed = 100f;
+		[SerializeField]
+		private float Speed = 100f;
         #endregion
 
 
@@ -20,7 +21,7 @@ namespace Hordes
                         DestroySelf();
                         break;
                     case Layers.ENEMY:
-						col.gameObject.GetComponentInChildren<Enemy>().TakeDamage(m_Damage, m_Body.velocity.normalized);
+						col.gameObject.GetComponentInChildren<Enemy>().TakeDamage(damage, m_Body.velocity.normalized);
                         DestroySelf();
                         break;
                 }

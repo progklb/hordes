@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198718410110264072}
   - component: {fileID: 199259365341819428}
   m_Layer: 0
-  m_Name: Std Ammo Collected Effect
+  m_Name: Ammo Collected Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3589,8 +3589,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.4852941, g: 0.637931, b: 1, a: 0.303}
-      maxColor: {r: 0.6039216, g: 0.88235295, b: 1, a: 0.56078434}
+      minColor: {r: 1, g: 0.29411763, b: 0.29411763, a: 0.303}
+      maxColor: {r: 1, g: 0.6039216, b: 0.6039216, a: 0.56078434}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

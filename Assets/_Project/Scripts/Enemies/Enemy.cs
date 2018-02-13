@@ -9,22 +9,39 @@ namespace Hordes
 	public abstract class Enemy : MonoBehaviour
 	{
 		#region EVENTS
-		public static Action<Enemy> onEnemyDestroyed = delegate { };
-		#endregion 
+		public static Action<Enemy> onDestroyed = delegate { };
+		#endregion
 
-	
+
+		#region PROPERTIES
+		public int health { get { return m_Health; } }
+		public int scoreValue { get { return m_ScoreValue; } }
+		#endregion
+
+
 		#region VARIABLES
-		public int m_Life = 1;
-		public GameObject m_DeathEffect;
+		[Header("Optional Overrides")]
+		[SerializeField] protected GameObject m_SpawnedEffect;
+		[SerializeField] protected GameObject m_DestroyedEffect;
 
-        protected NavMeshAgent m_Agent;
-        #endregion
+		[Space(10)]
+		[SerializeField] protected int m_Health = 1;
+		[SerializeField] protected int m_ScoreValue;
+
+		protected NavMeshAgent m_Agent;
+		#endregion
 
 
-        #region UNITY EVENTS
-        protected virtual void Start()
+		#region UNITY EVENTS
+		protected virtual void Start()
 		{
 			m_Agent = GetComponent<NavMeshAgent>();
+
+			// Apply default values if there are no overrides
+			if (m_SpawnedEffect == null)	m_SpawnedEffect = AssetProvider.instance.enemySpawnedEffectPrefab;
+			if (m_DestroyedEffect == null)	m_DestroyedEffect = AssetProvider.instance.enemyDestroyedEffectPrefab;
+
+			EffectsManager.instance.Instantiate(m_SpawnedEffect, transform.position);
 		}
 
 		protected abstract void Update();
@@ -44,11 +61,12 @@ namespace Hordes
 		#region PUBLIC API
 		public virtual bool TakeDamage(int damage, Vector3 damageDir = default(Vector3))
         {
-            m_Life -= damage;
+            m_Health -= damage;
 
-            if (m_Life <= 0)
+            if (m_Health <= 0)
             {
-                DestroySelf(damageDir);
+				SpawnHitEffect(damageDir);
+				DestroySelf();
             }
 
             return false;
@@ -57,17 +75,21 @@ namespace Hordes
 
 
         #region HELPER FUNCTIONS
-        protected virtual void DestroySelf(Vector3 damageDir = default(Vector3))
+        protected virtual void DestroySelf()
         {
-			if (m_DeathEffect != null && damageDir != default(Vector3))
-			{
-				var effect = Instantiate(m_DeathEffect); 
-				effect.transform.position = transform.position;
-				effect.transform.forward = damageDir;
-			}
+			onDestroyed(this);
 
 			Destroy(gameObject);
         }
-        #endregion
-    }
+
+		protected virtual void SpawnHitEffect(Vector3 damageDir = default(Vector3))
+		{
+			if (m_DestroyedEffect != null && damageDir != default(Vector3))
+			{
+				var effect = EffectsManager.instance.Instantiate(m_DestroyedEffect, transform.position);
+				effect.transform.forward = damageDir;
+			}
+		}
+		#endregion
+	}
 }

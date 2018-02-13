@@ -10,7 +10,9 @@ namespace Hordes
     public class Player : MonoBehaviour
     {
 		#region EVENTS
+		public static event Action onPlayerSpawn = delegate { };
 		public static event Action onPlayerDeath = delegate { };
+		public static event Action onAttack = delegate { };
 		#endregion
 
 
@@ -18,19 +20,20 @@ namespace Hordes
 		public static Player instance { get; private set; }
 		public static bool isAlive {  get { return instance != null; } }
 
+		public Rigidbody body { get { return m_Body; } }
         public Vector3 facingDir { get { return m_Body.transform.forward; } }
-        #endregion
+		#endregion
 
 
-        #region VARIABLES
-        public AmmoController m_AmmoController;
-		public Rigidbody m_Body;
+		#region VARIABLES
+		[SerializeField] private Rigidbody m_Body;
+		[SerializeField] private GameObject m_DeathEffect;
 
-		public GameObject m_DeathEffect;
-
-		public float m_MovementSpeed = 500;
-		public float m_SprintScaler = 2;
+		[SerializeField] private float m_MovementSpeed = 500;
+		[SerializeField] private float m_SprintScaler = 2;
 		private bool m_IsSprinting;
+
+		private AmmoController m_AmmoController;
 		#endregion
 
 
@@ -41,7 +44,10 @@ namespace Hordes
             {
                 instance = this;
 
+				m_AmmoController = GetComponent<AmmoController>();
 				AmmunitionNotifier.onAmmoTouched += OnAmmoTouched;
+
+				onPlayerSpawn();
 			}
 			else
             {
@@ -75,6 +81,7 @@ namespace Hordes
 		public void Attack(Vector3 targetPos)
 		{
 			m_AmmoController.Attack(targetPos);
+			onAttack();
 		}
 		#endregion
 

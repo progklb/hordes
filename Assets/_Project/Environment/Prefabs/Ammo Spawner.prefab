@@ -182,9 +182,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761a76586dbf04648bca5e070977161a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SpawnLocation: {fileID: 4821419123854954}
-  m_SpawnDelay: 30
   m_SpawnAtStart: 1
+  m_SpawnLocation: {fileID: 4821419123854954}
+  m_SpawnEffect: {fileID: 1548334649436152, guid: f7e44e4203ec93a41a185cecd569939c,
+    type: 2}
 --- !u!136 &136026163827963984
 CapsuleCollider:
   m_ObjectHideFlags: 1
