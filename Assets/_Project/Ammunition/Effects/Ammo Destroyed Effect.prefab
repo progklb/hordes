@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4147502465456792}
   - component: {fileID: 198279058310554722}
   - component: {fileID: 199480137232503284}
+  - component: {fileID: 114183932794507044}
   m_Layer: 0
   m_Name: Ammo Destroyed Effect
   m_TagString: Untagged
@@ -125,6 +126,19 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114183932794507044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1724568988685490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baac77f3838e62e4885e5c9db729e73b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Condition: 0
+  m_Delay: 3
 --- !u!198 &198279058310554722
 ParticleSystem:
   m_ObjectHideFlags: 1

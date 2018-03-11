@@ -36,9 +36,16 @@ namespace Hordes
             Ammunition.onDestroyed += HandleAmmoDestroyed;
         }
 
+		// Called upon player death
 		void OnDestroy()
 		{
             Ammunition.onDestroyed -= HandleAmmoDestroyed;
+
+			foreach (var ammo in m_Ammo)
+			{
+				ammo.SetAttackSet(true);
+				ammo.Attack(ammo.transform.position + ammo.transform.forward);
+			}
 		}
 		#endregion
 

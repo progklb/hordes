@@ -82,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677891149231434}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.13, y: -0.5, z: 9.53}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4821419123854954}
@@ -144,7 +144,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 1215facc5a3c1ae47b40c6285cd95315, type: 2}
+  - {fileID: 2100000, guid: aebb413f095d3584994b538f36df03f3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -183,8 +183,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpawnLocation: {fileID: 4821419123854954}
-  m_SpawnEffect: {fileID: 1548334649436152, guid: 5f433e3ac0aaf024086f561c0f98b3b7,
-    type: 2}
 --- !u!136 &136026163827963984
 CapsuleCollider:
   m_ObjectHideFlags: 1

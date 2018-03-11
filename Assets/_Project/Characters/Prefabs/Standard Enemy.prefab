@@ -188,10 +188,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610a59892ab7ccc4dac5d81dfb34b4dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SpawnedEffect: {fileID: 0}
+  m_DestroyedEffect: {fileID: 0}
   m_Health: 1
   m_ScoreValue: 5
-  m_DeathEffect: {fileID: 1724568988685490, guid: f80a1afbb5d5fd84181425e37ac15773,
-    type: 2}
+  m_ClassLevel: 1
 --- !u!136 &136273397753518136
 CapsuleCollider:
   m_ObjectHideFlags: 1

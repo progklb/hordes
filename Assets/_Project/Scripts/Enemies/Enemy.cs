@@ -8,7 +8,21 @@ namespace Hordes
 	[RequireComponent(typeof(NavMeshAgent))]
 	public abstract class Enemy : MonoBehaviour
 	{
+		#region TYPES
+		/// <summary>
+		/// Indicates the strength of enemy, where the higher the class the more powerful.
+		/// </summary>
+		public enum EnemyClass
+		{
+			Class1 = 1,
+			Class2 = 2,
+			Class3 = 3
+		}
+		#endregion
+
+
 		#region EVENTS
+		public static Action<Enemy> onSpawned = delegate { };
 		public static Action<Enemy> onDestroyed = delegate { };
 		#endregion
 
@@ -16,6 +30,7 @@ namespace Hordes
 		#region PROPERTIES
 		public int health { get { return m_Health; } }
 		public int scoreValue { get { return m_ScoreValue; } }
+		public EnemyClass classLevel { get { return m_ClassLevel; } }
 		#endregion
 
 
@@ -27,6 +42,7 @@ namespace Hordes
 		[Space(10)]
 		[SerializeField] protected int m_Health = 1;
 		[SerializeField] protected int m_ScoreValue;
+		[SerializeField] protected EnemyClass m_ClassLevel;
 
 		protected NavMeshAgent m_Agent;
 		#endregion
@@ -42,6 +58,8 @@ namespace Hordes
 			if (m_DestroyedEffect == null)	m_DestroyedEffect = AssetProvider.instance.enemyDestroyedEffectPrefab;
 
 			EffectsManager.instance.Instantiate(m_SpawnedEffect, transform.position);
+
+			onSpawned(this);
 		}
 
 		protected abstract void Update();
@@ -71,17 +89,17 @@ namespace Hordes
 
             return false;
         }
-        #endregion
 
-
-        #region HELPER FUNCTIONS
-        protected virtual void DestroySelf()
-        {
+		public virtual void DestroySelf()
+		{
 			onDestroyed(this);
 
 			Destroy(gameObject);
-        }
+		}
+		#endregion
 
+
+		#region HELPER FUNCTIONS
 		protected virtual void SpawnHitEffect(Vector3 damageDir = default(Vector3))
 		{
 			if (m_DestroyedEffect != null && damageDir != default(Vector3))

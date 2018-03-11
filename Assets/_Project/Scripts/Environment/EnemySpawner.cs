@@ -17,19 +17,6 @@ namespace Hordes
 
 
 		#region UNITY EVENTS
-		// TODO WaveManager should handle enemy spawning
-
-		IEnumerator Start()
-		{
-			canSpawn = true;
-
-			for (;;)
-			{
-				yield return new WaitForSeconds(10);
-				Spawn();
-			}
-		}
-
 		void OnTriggerEnter(Collider col)
 		{
 			if (ShouldToggleCanSpawn(col))
@@ -48,12 +35,26 @@ namespace Hordes
 		#endregion
 
 
-		#region HELPER FUNCTIONS
-		void Spawn()
+		#region PUBLIC API
+		public void Spawn(GameObject enemyPrefab = null)
 		{
-			Instantiate(AssetProvider.instance.stdEnemyPrefab, m_SpawnLocation.position, m_SpawnLocation.rotation);
+			Instantiate(enemyPrefab, m_SpawnLocation.position, m_SpawnLocation.rotation);
 		}
 
+		public IEnumerator StartAutoSpawnAsync(float spawnInterval)
+		{
+			canSpawn = true;
+
+			for (;;)
+			{
+				yield return new WaitForSeconds(spawnInterval);
+				Spawn();
+			}
+		}
+		#endregion
+
+
+		#region HELPER FUNCTIONS
 		bool ShouldToggleCanSpawn(Collider col)
 		{
 			// Check if the collision is caused by the player or the player's ammo.

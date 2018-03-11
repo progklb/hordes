@@ -60,6 +60,7 @@ namespace Hordes
             instance = null;
 
 			AmmunitionNotifier.onAmmoTouched -= OnAmmoTouched;
+			
 		}
 		#endregion
 

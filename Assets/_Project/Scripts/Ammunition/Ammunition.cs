@@ -67,7 +67,7 @@ namespace Hordes
 			if (m_CollectedEffect == null)	m_CollectedEffect = AssetProvider.instance.ammoCollectedEffectPrefab;
 			if (m_DestroyedEffect == null)	m_DestroyedEffect = AssetProvider.instance.ammoDestroyedEffectPrefab;
 
-			EffectsManager.instance.Instantiate(m_SpawnedEffect, transform.position, transform.rotation);
+			EffectsManager.instance.Instantiate(m_SpawnedEffect, transform.position);
 		}
 
         protected virtual void OnDestroy()

@@ -12,14 +12,13 @@ namespace Hordes
 		#region UNITY EVENTS
 		void Awake()
 		{
-			if (instance == null)
-			{
-				instance = this;
-			}
-			else
+			if (instance != null)
 			{
 				Debug.LogFormat("[{0}] This is more than one manager instance in the scene.", typeof(EffectsManager).Name);
+				return;
 			}
+
+			instance = this;
 		}
 		#endregion
 

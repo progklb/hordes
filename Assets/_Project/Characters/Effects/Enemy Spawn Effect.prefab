@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4348333640227516}
   - component: {fileID: 198718410110264072}
   - component: {fileID: 199259365341819428}
+  - component: {fileID: 114743632537350318}
   m_Layer: 0
   m_Name: Enemy Spawn Effect
   m_TagString: Untagged
@@ -82,8 +83,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1548334649436152}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 3, y: 0.37, z: -10}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.37, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4650139332233296}
@@ -121,6 +122,19 @@ MonoBehaviour:
   YRotation: 1
   ZAngularSpeed: 88.22
   ZRotation: 0
+--- !u!114 &114743632537350318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1548334649436152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baac77f3838e62e4885e5c9db729e73b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Condition: 0
+  m_Delay: 3
 --- !u!198 &198132198394216550
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3762,8 +3776,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 0
+      minMaxState: 0
+      scalar: -1.5707963
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3803,7 +3817,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 3
+      minMaxState: 0
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -3844,8 +3858,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotation:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 3.1415925
+      minMaxState: 0
+      scalar: 0
       minScalar: -3.1415925
       maxCurve:
         serializedVersion: 2
@@ -3874,7 +3888,7 @@ ParticleSystem:
     randomizeRotationDirection: 0
     maxNumParticles: 1000
     size3D: 0
-    rotation3D: 0
+    rotation3D: 1
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
@@ -4558,8 +4572,8 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0
-      minScalar: 0
+      scalar: 0.4
+      minScalar: 0.6
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4587,8 +4601,8 @@ ParticleSystem:
     z:
       serializedVersion: 2
       minMaxState: 3
-      scalar: -0.6
-      minScalar: -0.4
+      scalar: 0
+      minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
