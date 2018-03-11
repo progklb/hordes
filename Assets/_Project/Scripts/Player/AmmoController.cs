@@ -43,8 +43,7 @@ namespace Hordes
 
 			foreach (var ammo in m_Ammo)
 			{
-				ammo.SetAttackSet(true);
-				ammo.Attack(ammo.transform.position + ammo.transform.forward);
+				ammo.DestroySelf();
 			}
 		}
 		#endregion
