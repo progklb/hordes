@@ -53,6 +53,7 @@ namespace Hordes
 
 		protected Rigidbody m_Body;
 		protected Transform m_Transform;
+		protected Renderer m_CollectedRenderer;
 		#endregion
 
 
@@ -61,6 +62,7 @@ namespace Hordes
         {
 			m_Body = GetComponent<Rigidbody>();
             m_Transform = transform;
+			m_CollectedRenderer = m_CollectedModel.GetComponentInChildren<MeshRenderer>();
 
 			// Apply default values if there are no overrides
 			if (m_SpawnedEffect == null)	m_SpawnedEffect = AssetProvider.instance.ammoSpawnedEffectPrefab;
@@ -144,7 +146,13 @@ namespace Hordes
         {
             isFired = true;
             m_Animator.SetBool(ANIM_ATTACK, true);
-        }
+
+			// Enable emmision on the material for visual effect.
+			// We create a new material instance as to not affect all objects with this material.
+			var material = new Material(m_CollectedRenderer.material);
+			material.EnableKeyword("_EMISSION");
+			m_CollectedRenderer.material = material;
+		}
 
         public virtual void HandleOnTriggerEnter(Collider col) { }
         #endregion
