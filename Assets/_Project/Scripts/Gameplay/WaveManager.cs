@@ -8,7 +8,7 @@ using EnemyClass = Hordes.Enemy.EnemyClass;
 
 namespace Hordes
 {
-	public class WaveManager : MonoBehaviour
+	public sealed class WaveManager : MonoBehaviour
 	{
 		#region EVENTS
 		public static event Action<int> onWaveStarted = delegate { };
