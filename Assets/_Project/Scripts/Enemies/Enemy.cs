@@ -83,6 +83,7 @@ namespace Hordes
 
             if (m_Health <= 0)
             {
+				EffectsManager.instance.PlayEnemyDeathEffect();
 				SpawnHitEffect(damageDir);
 				DestroySelf();
             }

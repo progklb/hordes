@@ -47,6 +47,8 @@ namespace Hordes
 				m_AmmoController = GetComponent<AmmoController>();
 				AmmunitionNotifier.onAmmoTouched += OnAmmoTouched;
 
+				EffectsManager.instance.PlayPlayerSpawnEffect();
+
 				onPlayerSpawn();
 			}
 			else

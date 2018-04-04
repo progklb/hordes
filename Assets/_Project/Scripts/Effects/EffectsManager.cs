@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.PostProcessing;
 
 using System.Collections;
 
@@ -19,6 +20,8 @@ namespace Hordes
 		[SerializeField] [Range(0f, 1f)] private float m_ScanLineJitterAmount = 0.2f;
 		[SerializeField] [Range(0f, 1f)] private float m_VerticalJumpAmount = 0.02f;
 		[SerializeField] [Range(0f, 1f)] private float m_ColorDriftAmount = 0.05f;
+
+		[SerializeField] [Range(1f, 20f)] private float m_EffectSpeed = 5f;
 		#endregion
 
 
@@ -54,14 +57,12 @@ namespace Hordes
 
 		public void PlayPlayerSpawnEffect()
 		{
-		}
-
-		public void PlayPlayerDeathEffect()
-		{
+			StartCoroutine(PlayGlitchIntroAsync(1f));
 		}
 
 		public void PlayEnemyDeathEffect()
 		{
+			StartCoroutine(PlayEffectAsync(1f));
 		}
 
 		public void SetAnalogGlitch(bool glitchEnabled)
@@ -75,15 +76,10 @@ namespace Hordes
 				SetGlitchAmounts(0f, 0f, 0f);
 			}
 		}
-
-		public void PlayGlitchIntro()
-		{
-			StartCoroutine(PlayGlitchIntroAsync(1f));
-		}
 		#endregion
 
 
-		#region HELPER FUNCTIONS
+		#region HELPER FUNCTIONS - COROUTINES
 		IEnumerator PlayGlitchIntroAsync(float duration)
 		{
 			var fps = 30f;
@@ -100,6 +96,25 @@ namespace Hordes
 			SetGlitchAmounts(0f, 0f, 0f);
 		}
 
+		IEnumerator PlayEffectAsync(float duration)
+		{
+			var profile = Camera.main.GetComponent<PostProcessingBehaviour>().profile;
+			var startTime = Time.time;
+
+			var settings = profile.chromaticAberration.settings;
+
+			do
+			{
+				settings.intensity = Mathf.Sin((Time.time - startTime) * m_EffectSpeed);
+				profile.chromaticAberration.settings = settings;
+				yield return null;
+			}
+			while (settings.intensity >= 0);
+		}
+		#endregion
+
+
+		#region HELPER FUNCTIONS - GENERAL
 		void SetGlitchAmounts(float scanLineJitter, float verticalJump, float colorDrift)
 		{
 			glitch.scanLineJitter = scanLineJitter;
