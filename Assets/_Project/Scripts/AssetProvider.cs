@@ -26,6 +26,7 @@ namespace Hordes
 
 		public GameObject enemySpawnedEffectPrefab { get { return m_EnemySpawnedEffectPrefab; } }
 		public GameObject enemyDestroyedEffectPrefab { get { return m_EnemyDestroyedEffectPrefab; } }
+		public GameObject enemyCleanedUpEffectPrefab { get { return m_EnemyCleanedUpEffectPrefab; } }
 		#endregion
 
 
@@ -44,6 +45,7 @@ namespace Hordes
 		[SerializeField] private GameObject[] m_EnemyPrefabs;
 		[SerializeField] private GameObject m_EnemySpawnedEffectPrefab;
 		[SerializeField] private GameObject m_EnemyDestroyedEffectPrefab;
+		[SerializeField] private GameObject m_EnemyCleanedUpEffectPrefab;
 
 		/// A cache for convenient runtime retrieval
 		private Dictionary<EnemyClass, List<GameObject>> m_CachedEnemyPrefabs;

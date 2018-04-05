@@ -34,6 +34,8 @@ namespace Hordes
 
 
 		#region VARIABLES
+		[SerializeField] private float m_SpawnInterval = 10f;
+
 		private EnemySpawner[] m_SpawnPoints;
 		#endregion
 
@@ -64,16 +66,11 @@ namespace Hordes
 		public void ResetAll()
 		{
 			waveNumber = 1;
-			spawnInterval = 10f;
+			spawnInterval = m_SpawnInterval;
 
 			spawnChanceClass1 = 1f;
 			spawnChanceClass2 = 0f;
 			spawnChanceClass3 = 0f;
-
-			foreach (var enemy in m_Enemies)
-			{
-				Destroy(enemy);
-			}
 
 			m_Enemies.Clear();
 		}
@@ -89,6 +86,11 @@ namespace Hordes
 		public void EndWaves()
 		{
 			StopAllCoroutines();
+
+			foreach (var enemy in m_Enemies)
+			{
+				enemy.CleanUp();
+			}
 
 			onWaveEnded -= OnWaveEnded;
 		}

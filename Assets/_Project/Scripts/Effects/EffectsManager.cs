@@ -12,7 +12,8 @@ namespace Hordes
 		#region PROPERTIES
 		public static EffectsManager instance { get; private set; }
 
-		private AnalogGlitch glitch;
+		private AnalogGlitch glitch { get; set; }
+		private bool isPlayingEffect { get; set; }
 		#endregion
 
 
@@ -62,7 +63,10 @@ namespace Hordes
 
 		public void PlayEnemyDeathEffect()
 		{
-			StartCoroutine(PlayEffectAsync(1f));
+			if (!isPlayingEffect)
+			{
+				StartCoroutine(PlayEffectAsync(1f));
+			}
 		}
 
 		public void SetAnalogGlitch(bool glitchEnabled)
@@ -98,6 +102,8 @@ namespace Hordes
 
 		IEnumerator PlayEffectAsync(float duration)
 		{
+			isPlayingEffect = true;
+
 			var profile = Camera.main.GetComponent<PostProcessingBehaviour>().profile;
 			var startTime = Time.time;
 
@@ -110,6 +116,8 @@ namespace Hordes
 				yield return null;
 			}
 			while (settings.intensity >= 0);
+
+			isPlayingEffect = false;
 		}
 		#endregion
 

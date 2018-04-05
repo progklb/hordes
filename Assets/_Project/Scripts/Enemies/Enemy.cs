@@ -38,6 +38,7 @@ namespace Hordes
 		[Header("Optional Overrides")]
 		[SerializeField] protected GameObject m_SpawnedEffect;
 		[SerializeField] protected GameObject m_DestroyedEffect;
+		[SerializeField] protected GameObject m_CleanupEffect;
 
 		[Space(10)]
 		[SerializeField] protected int m_Health = 1;
@@ -56,6 +57,7 @@ namespace Hordes
 			// Apply default values if there are no overrides
 			if (m_SpawnedEffect == null)	m_SpawnedEffect = AssetProvider.instance.enemySpawnedEffectPrefab;
 			if (m_DestroyedEffect == null)	m_DestroyedEffect = AssetProvider.instance.enemyDestroyedEffectPrefab;
+			if (m_CleanupEffect == null)	m_CleanupEffect = AssetProvider.instance.enemyCleanedUpEffectPrefab;
 
 			EffectsManager.instance.Instantiate(m_SpawnedEffect, transform.position);
 
@@ -91,9 +93,9 @@ namespace Hordes
             return false;
         }
 
-		public virtual void DestroySelf()
+		public virtual void CleanUp()
 		{
-			onDestroyed(this);
+			EffectsManager.instance.Instantiate(m_CleanupEffect, transform.position);
 
 			Destroy(gameObject);
 		}
@@ -101,6 +103,13 @@ namespace Hordes
 
 
 		#region HELPER FUNCTIONS
+		protected virtual void DestroySelf()
+		{
+			onDestroyed(this);
+
+			Destroy(gameObject);
+		}
+
 		protected virtual void SpawnHitEffect(Vector3 damageDir = default(Vector3))
 		{
 			if (m_DestroyedEffect != null && damageDir != default(Vector3))
