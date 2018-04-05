@@ -65,7 +65,7 @@ namespace Hordes
 		{
 			if (!isPlayingEffect)
 			{
-				StartCoroutine(PlayEffectAsync(1f));
+				StartCoroutine(PlayEffectAsync());
 			}
 		}
 
@@ -100,7 +100,7 @@ namespace Hordes
 			SetGlitchAmounts(0f, 0f, 0f);
 		}
 
-		IEnumerator PlayEffectAsync(float duration)
+		IEnumerator PlayEffectAsync()
 		{
 			isPlayingEffect = true;
 
